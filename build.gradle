@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.10.0'
+}
+
+group 'org.mangops.crud'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation 'junit:junit:4.13.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.1'
+    implementation 'org.modelmapper:modelmapper:3.1.1'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation 'org.mockito:mockito-core:5.4.0'
+    testImplementation 'io.rest-assured:json-path:5.3.1'
+    //testImplementation 'io.qameta.allure:allure-junit5:2.17.0'
+    testImplementation 'io.qameta.allure:allure-junit4:2.23.0'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
