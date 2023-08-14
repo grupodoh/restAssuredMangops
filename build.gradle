@@ -19,8 +19,12 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest:2.2'
     testImplementation 'org.mockito:mockito-core:5.4.0'
     testImplementation 'io.rest-assured:json-path:5.3.1'
-    //testImplementation 'io.qameta.allure:allure-junit5:2.17.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.17.0'
     testImplementation 'io.qameta.allure:allure-junit4:2.23.0'
+    implementation 'org.apache.logging.log4j:log4j-core:3.0.0-alpha1'
+    implementation 'org.apache.logging.log4j:log4j-api:3.0.0-alpha1'
+    testImplementation 'org.apache.logging.log4j:log4j-slf4j-impl:3.0.0-alpha1'
+
 
 
 }
