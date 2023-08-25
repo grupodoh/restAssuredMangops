@@ -1,29 +1,33 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ContractorCompaniesCrudTest {
 
     private String token;
+    private String appQa = "application";
+    private String applicationQa= "siie.qa.interedes.com.co";
     private  String cantCompanies;
     private  String idCreatedCompany;
 
 
 
-    @Test
-    public void ContractorCompaniesCrud(){
-        RestAssured.baseURI ="https://siie.qa.interedes.com.co/services";
+    @Order(1)
+    @BeforeEach
+    public void getTokenTest(){
+
+        RestAssured.baseURI= "https://siie.qa.interedes.com.co/services";
 
         token = given()
-                .log()
-                .all()
-                .header("application","siie.qa.interedes.com.co")
+                .header(appQa,applicationQa)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
                         "    \"username\": \"3332\",\n" +
@@ -31,24 +35,41 @@ public class ContractorCompaniesCrudTest {
                         "}")
                 .post("/dynamic-service/auth/login")
                 .then()
-                .log()
-                .all()
                 .statusCode(200)
                 .extract()
                 .path("data.accessToken")
                 .toString();
 
-        System.out.println(token);
+        //System.out.println(token);
+    }
 
+    @Test
+    public void getAllCompanies(){
 
         cantCompanies = given()
                 .log()
                 .all()
-                .header("application","siie.qa.interedes.com.co")
+                .header(appQa,applicationQa)
                 .header("Authorization", token)
                 .header("tenant","INTEREDES")
-                .post("/user-service/company/v1/get_all_companies")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"filters\": [\n" +
+                        "        {\n" +
+                        "            \"key\": \"name\",\n" +
+                        "            \"operator\": \"LIKE\",\n" +
+                        "            \"field_type\": \"STRING\",\n" +
+                        "            \"value\": \"INFRA\"\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"sorts\": [],\n" +
+                        "    \"page\": null,\n" +
+                        "    \"size\": null\n" +
+                        "}")
+                .post("/dynamic-service/services/parameters-service/company/v1/get_companies_criteria")
                 .then()
+                .log()
+                .all()
                 .statusCode(200)
                 .extract()
                 .body()
@@ -61,34 +82,6 @@ public class ContractorCompaniesCrudTest {
         System.out.println("La cantidad de empresas registradas son: " + CantCompanies);
 
 
-
-        idCreatedCompany = given()
-                .log()
-                .all()
-                .header("application","siie.qa.interedes.com.co",
-                        "Authorization",token,
-                        "tenant","INTEREDES")
-                .body("{\n" +
-                        "    \"name\": \"GRUPO EMPRESARIAL DOH - GEDOH 2\",\n" +
-                        "    \"identificationTypeId\": 2,\n" +
-                        "    \"idNumber\": \"1075900802\",\n" +
-                        "    \"checkDigit\": \"1\",\n" +
-                        "    \"address\": \"Carrera 5 # 13 - 62\",\n" +
-                        "    \"cityId\": 1,\n" +
-                        "    \"phone\": \"3157712202\",\n" +
-                        "    \"email\": \"gedoh2@gmail.com\",\n" +
-                        "    \"personTypeId\": 1,\n" +
-                        "    \"status\": 1,\n" +
-                        "    \"main\": 1\n" +
-                        "}")
-                .post("/dynamic-service/services/parameters-service/company/v1/create")
-                .then()
-                .statusCode(200)
-                .extract()
-                .path("data.id")
-                .toString();
-
-        System.out.println("El ide de la empresa creada es: "+idCreatedCompany);
 
 
     }
