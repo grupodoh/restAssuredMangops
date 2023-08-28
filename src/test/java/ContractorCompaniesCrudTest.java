@@ -43,6 +43,7 @@ public class ContractorCompaniesCrudTest {
         //System.out.println(token);
     }
 
+    @Order(1)
     @Test
     public void getAllCompanies(){
 
@@ -59,10 +60,15 @@ public class ContractorCompaniesCrudTest {
                         "            \"key\": \"name\",\n" +
                         "            \"operator\": \"LIKE\",\n" +
                         "            \"field_type\": \"STRING\",\n" +
-                        "            \"value\": \"INFRA\"\n" +
+                        "            \"value\": \"\"\n" +
                         "        }\n" +
                         "    ],\n" +
-                        "    \"sorts\": [],\n" +
+                        "    \"sorts\": [" +
+                        "                   {\n" +
+                                "               \"key\":\"id\",\n" +
+                                "               \"direction\": \"ASC\"\n" +
+                                "           }\n" +
+                        "               ],\n" +
                         "    \"page\": null,\n" +
                         "    \"size\": null\n" +
                         "}")
@@ -81,8 +87,11 @@ public class ContractorCompaniesCrudTest {
 
         System.out.println("La cantidad de empresas registradas son: " + CantCompanies);
 
+    }
 
-
+    @Order(2)
+    @Test
+    public void createContractorCompanyTest(){
 
     }
 
