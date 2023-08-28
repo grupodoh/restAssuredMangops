@@ -19,7 +19,6 @@ public class ContractorCompaniesCrudTest {
     private  String idCreatedCompany;
 
 
-
     @Order(1)
     @BeforeEach
     public void getTokenTest(){
@@ -86,12 +85,12 @@ public class ContractorCompaniesCrudTest {
         int CantCompanies = CompaniesArray.size();
 
         System.out.println("La cantidad de empresas registradas son: " + CantCompanies);
-
     }
 
     @Order(2)
     @Test
     public void createContractorCompanyTest(){
+
 
     }
 
