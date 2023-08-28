@@ -1,0 +1,16 @@
+stages:
+  - build
+  
+#----------------------------------------------------------
+#  Rest_Assured_Mangops - Servidor IA
+#----------------------------------------------------------
+
+Build_Stage:
+  stage: build
+  script:
+    - cd /home/ia/microservicios/endpoint_test_mangops/restassuredmangops && git reset --hard
+    - cd /home/ia/microservicios/endpoint_test_mangops/restassuredmangops && git pull origin master
+  only:
+  - master
+  tags:
+  - srv-ia-shared
