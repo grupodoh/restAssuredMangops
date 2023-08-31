@@ -3,6 +3,8 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.*;
 
+
+
 import java.util.List;
 import java.util.Objects;
 
@@ -42,39 +44,14 @@ public class ZonesCrudTest {
     private String responseDeleteZoneById;
     private String validationDeleteZone;
      private String applicationQa = "siie.qa.interedes.com.co";
+     private String appQa = "application";
      int CantZones1;
 
 
     @BeforeEach
-    public void getTokenTest() {
-
-        RestAssured.baseURI = "https://siie.qa.interedes.com.co/services";
-
-        /***
-         * 1. Esta es la prueba de la creación del token a la hora de
-         * acceder al loggin.
-         */
-
-        token = given()
-                .log()
-                .all()
-                .header("application", applicationQa)
-                .contentType(ContentType.JSON)
-                .body("{\n" +
-                        "    \"username\": \"3332\",\n" +
-                        "    \"password\": 3332\n" +
-                        "}")
-                .post("/dynamic-service/auth/login")
-                .then()
-                .log()
-                .all()
-                .statusCode(200)
-                .extract()
-                .path("data.accessToken")
-                .toString();
-
-        System.out.println("Este es el token que se generó:  \n" + token + "\n \n");
-
+    public void setUp(){
+        var tkn = new TokenGenerator();
+        this.token = tkn.getToken();
     }
 
     @Order(1)
@@ -89,8 +66,8 @@ public class ZonesCrudTest {
                 .log()
                 .all()
                 .contentType(ContentType.JSON)
-                .header("application",applicationQa)
-                .header("Authorization", token)
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token)
                 .header("tenant","INTEREDES")
                 .body("{\n" +
                         "    \"filters\": [\n" +
@@ -134,7 +111,7 @@ public class ZonesCrudTest {
             CreatedIdZone = given()
                     .log()
                     .all()
-                    .header("application",applicationQa)
+                    .header(appQa,applicationQa)
                     .contentType(ContentType.JSON)
                     .header("Authorization", token )
                     .header("tenant","INTEREDES")
@@ -169,7 +146,7 @@ public class ZonesCrudTest {
                     .all()
                     .contentType(ContentType.TEXT)
                     .contentType(ContentType.JSON)
-                    .header("application",applicationQa)
+                    .header(appQa,applicationQa)
                     .header("Authorization", token)
                     .header("tenant","INTEREDES")
                     .body("{\n" +
@@ -219,7 +196,7 @@ public class ZonesCrudTest {
                     .all()
                     .contentType(ContentType.TEXT)
                     .contentType(ContentType.JSON)
-                    .header("application",applicationQa)
+                    .header(appQa,applicationQa)
                     .header("Authorization", token)
                     .header("tenant","INTEREDES")
                     .body("{\n" +
@@ -264,7 +241,7 @@ public class ZonesCrudTest {
             GetZoneById = given()
                     .log()
                     .all()
-                    .header("application",applicationQa)
+                    .header(appQa,applicationQa)
                     .header("Authorization", token )
                     .header("tenant","INTEREDES")
                     .contentType(ContentType.JSON)
@@ -288,7 +265,7 @@ public class ZonesCrudTest {
              * 7. Esta es la prueba de actualizar la zona, donde se actualiza el nombre o descripción de la zona,
              */
             UpdateZone = given()
-                    .header("application",applicationQa)
+                    .header(appQa,applicationQa)
                     .contentType(ContentType.JSON)
                     .header("Authorization", token )
                     .log()
@@ -315,7 +292,7 @@ public class ZonesCrudTest {
              * 8. Esta es la validación de la actualización del registro de la zona
              */
             GetZoneById = RestAssured.given()
-                    .header("application",applicationQa)
+                    .header(appQa,applicationQa)
                     .header("Authorization", token )
                     .header("tenant","INTEREDES")
                     .contentType(ContentType.JSON)
@@ -339,7 +316,7 @@ public class ZonesCrudTest {
              */
 
             responseDeleteZoneById = given()
-                    .header("application",applicationQa)
+                    .header(appQa,applicationQa)
                     .contentType(ContentType.JSON)
                     .header("Authorization", token )
                     .log()
@@ -363,7 +340,7 @@ public class ZonesCrudTest {
                  */
 
                 validationDeleteZone = RestAssured.given()
-                        .header("application",applicationQa)
+                        .header(appQa,applicationQa)
                         .header("Authorization", token )
                         .header("tenant","INTEREDES")
                         .contentType(ContentType.JSON)

@@ -19,26 +19,11 @@ public class PositionsCrudTest {
     private String IdDelete;
     private String tenant= "INTEREDES";
     private String applicationQa= "siie.qa.interedes.com.co";
+
     @BeforeEach
-    public void getTokenTest(){
-
-        RestAssured.baseURI= "https://siie.qa.interedes.com.co/services";
-
-        token = given()
-                .header(appQa,applicationQa)
-                .contentType(ContentType.JSON)
-                .body("{\n" +
-                        "    \"username\": \"3332\",\n" +
-                        "    \"password\": 3332\n" +
-                        "}")
-                .post("/dynamic-service/auth/login")
-                .then()
-                .statusCode(200)
-                .extract()
-                .path("data.accessToken")
-                .toString();
-
-        //System.out.println(token);
+    public void setUp(){
+        var tkn = new TokenGenerator();
+        this.token = tkn.getToken();
     }
 
     @Order(1)
