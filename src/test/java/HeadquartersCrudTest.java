@@ -11,6 +11,7 @@ public class HeadquartersCrudTest {
     private String token;
     private String applicationQa = "siie.qa.interedes.com.co";
     private String appQa = "application";
+    private String IdHeadquarter;
 
     @BeforeEach
     public void setUp(){
@@ -21,7 +22,7 @@ public class HeadquartersCrudTest {
 
     @Order(1)
     @Test
-    public void GetAllHeadquarters(){
+    public void getAllHeadquarters(){
 
                 given()
                         .log()
@@ -62,6 +63,47 @@ public class HeadquartersCrudTest {
     @Order(2)
     @Test
     public void CreateAHeadquarterTest(){
+
+        IdHeadquarter =
+                given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"name\": \"Agencia Comercial\",\n" +
+                        "    \"identificationTypeId\": null,\n" +
+                        "    \"indentificationTypeDTO\": null,\n" +
+                        "    \"idNumber\": 900340866,\n" +
+                        "    \"checkDigit\": 4,\n" +
+                        "    \"address\": \"Parque Industrial Lote 11\",\n" +
+                        "    \"latitude\": 2.9281528193026842,\n" +
+                        "    \"longitude\": -75.31640244006543,\n" +
+                        "    \"branchTypeId\": 1,\n" +
+                        "    \"cityId\": 626,\n" +
+                        "    \"cityDTO\": null,\n" +
+                        "    \"phone\": \"3157712205\",\n" +
+                        "    \"email\": \"oscar.calvache@interedes.com.co\",\n" +
+                        "    \"contactName\": \"Oscar Mauricio Calvache\",\n" +
+                        "    \"personTypeId\": null,\n" +
+                        "    \"personTypeDTO\": null,\n" +
+                        "    \"status\": 1,\n" +
+                        "    \"main\": 0,\n" +
+                        "    \"companyId\": 2,\n" +
+                        "    \"companyName\": null\n" +
+                        "}")
+                .post("/dynamic-service/services/parameters-service/company/v1/create")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .extract()
+                .path("data.id")
+                .toString();
+
+        System.out.println("El id dela sede creada es: " + IdHeadquarter);
 
 
     }
