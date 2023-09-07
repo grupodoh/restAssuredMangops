@@ -62,6 +62,47 @@ public class HeadquartersCrudTest {
 
     @Order(2)
     @Test
+    public void branchTypeHeadquarter(){
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"filters\": [\n" +
+                        "        {\n" +
+                        "            \"key\": \"status\",\n" +
+                        "            \"operator\": \"EQUAL\",\n" +
+                        "            \"field_type\": \"INTEGER\",\n" +
+                        "            \"value\": 1\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"sorts\": [\n" +
+                        "        {\n" +
+                        "            \"key\":\"id\",\n" +
+                        "            \"direction\":\"ASC\"\n" +
+                        "        }\n" +
+                        "\n" +
+                        "    \n" +
+                        "    ],\n" +
+                        "    \"page\": null,\n" +
+                        "    \"size\": null\n" +
+                        "}")
+                .post("/dynamic-service/services/parameters-service/company/v1/get_branch_type_criteria")
+                .then()
+                .log()
+                .all()
+                .extract()
+                .body()
+                .asString();
+
+
+    }
+
+    @Order(3)
+    @Test
     public void createAHeadquarterTest(){
 
         IdHeadquarter =
@@ -110,7 +151,7 @@ public class HeadquartersCrudTest {
 
     }
 
-    @Order(3)
+    @Order(4)
     @Test
     public void updateHeadquarter(){
         given()
@@ -151,7 +192,7 @@ public class HeadquartersCrudTest {
 
     }
 
-    @Order(4)
+    @Order(5)
     @Test
     public void deleteHeadquarter(){
 
