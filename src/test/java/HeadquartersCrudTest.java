@@ -103,6 +103,29 @@ public class HeadquartersCrudTest {
 
     @Order(3)
     @Test
+    public void getCitiesHeadquarter(){
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .get("/dynamic-service/services/user-service/city/v1/get_city?size=2000")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .extract()
+                .body()
+                .asString();
+
+
+    }
+
+
+    @Order(4)
+    @Test
     public void createAHeadquarterTest(){
 
         IdHeadquarter =
@@ -151,7 +174,7 @@ public class HeadquartersCrudTest {
 
     }
 
-    @Order(4)
+    @Order(5)
     @Test
     public void updateHeadquarter(){
         given()
@@ -192,7 +215,7 @@ public class HeadquartersCrudTest {
 
     }
 
-    @Order(5)
+    @Order(6)
     @Test
     public void deleteHeadquarter(){
 
