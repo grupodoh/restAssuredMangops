@@ -35,7 +35,7 @@ public class ContractorCompaniesCrudTest {
                 .log()
                 .all()
                 .header(appQa,applicationQa)
-                .header("Authorization", token)
+                .header("Authorization", this.token)
                 .header("tenant","INTEREDES")
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -80,7 +80,7 @@ public class ContractorCompaniesCrudTest {
                 .log()
                 .all()
                 .header(appQa,applicationQa)
-                .header("Authorization",token)
+                .header("Authorization",this.token)
                 .header("tenant","INTEREDES")
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -116,7 +116,7 @@ public class ContractorCompaniesCrudTest {
                 .log()
                 .all()
                 .header(appQa,applicationQa)
-                .header("Authorization",token)
+                .header("Authorization",this.token)
                 .header("tenant","INTEREDES")
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -161,7 +161,7 @@ public class ContractorCompaniesCrudTest {
                 .log()
                 .all()
                 .header(appQa,applicationQa)
-                .header("Authorization",token)
+                .header("Authorization",this.token)
                 .header("tenant","INTEREDES")
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -201,7 +201,7 @@ public class ContractorCompaniesCrudTest {
                 .log()
                 .all()
                 .header(appQa,applicationQa)
-                .header("Authorization",token)
+                .header("Authorization",this.token)
                 .header("tenant","INTEREDES")
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -244,7 +244,7 @@ public class ContractorCompaniesCrudTest {
                 .log()
                 .all()
                 .header(appQa,applicationQa)
-                .header("Authorization",token)
+                .header("Authorization",this.token)
                 .header("tenant","INTEREDES")
                 .delete("/dynamic-service/services/user-service/company/v1/delete_company/"+idCreatedCompany)
                 .then()

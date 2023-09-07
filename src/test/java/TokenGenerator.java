@@ -17,8 +17,6 @@ public class TokenGenerator {
          */
 
         token = given()
-                .log()
-                .all()
                 .header("application", applicationQa)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -27,14 +25,13 @@ public class TokenGenerator {
                         "}")
                 .post("/dynamic-service/auth/login")
                 .then()
-                .log()
-                .all()
                 .statusCode(200)
                 .extract()
                 .path("data.accessToken")
                 .toString();
 
-        System.out.println("Este es el token que se generó:  \n" + token + "\n \n");
-return token;
+       // System.out.println("Este es el token que se generó:  \n" + token + "\n \n");
+
+        return token;
     }
 }
