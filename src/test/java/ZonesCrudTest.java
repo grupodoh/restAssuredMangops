@@ -100,259 +100,259 @@ public class ZonesCrudTest {
         //System.out.println("se muestran todas las zonas existentes: \n " + GetAllZones1+"\n \n");
         }
 
-        @Order(2)
-        @Test
-        public void createZone(){
-            /***
-             * 3. Esta es la prueba de la creación de una zona, donde se utiliza el token creado en la prueba anterior
-             * y se almacena el ID de la zona creada.
+    @Order(2)
+    @Test
+    public void createZone(){
+        /***
+         * 3. Esta es la prueba de la creación de una zona, donde se utiliza el token creado en la prueba anterior
+         * y se almacena el ID de la zona creada.
+         */
+
+        CreatedIdZone = given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .contentType(ContentType.JSON)
+                .header("Authorization", this.token )
+                .header("tenant","INTEREDES")
+                .body("{\n" +
+                        "    \"description\": \"ZONE NORTH WEST10\",\n" +
+                        "    \"status\": 1\n" +
+                        "}")
+                .post("/dynamic-service/services/user-service/zone/v1/create_zone")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .extract()
+                .path("data.id")
+                .toString();
+
+        System.out.println("Este es el ID de la zona creada:  \n \n"+CreatedIdZone+"\n \n");
+
+
+    }
+
+    @Order(3)
+    @Test
+    public void validationCreateZone(){
+        /***
+         * 4. Esta es la prueba de consultar todas las zonas creadas despues
+         * de haber creada la nueva zona,en la cual se validara el aumento en 1
+         */
+
+        GetAllZones2 = RestAssured.given()
+                .log()
+                .all()
+                .contentType(ContentType.TEXT)
+                .contentType(ContentType.JSON)
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token)
+                .header("tenant","INTEREDES")
+                .body("{\n" +
+                        "    \"filters\": [\n" +
+                        "        \n" +
+                        "     \n" +
+                        "    ],\n" +
+                        "    \"sorts\": [\n" +
+                        "        {\n" +
+                        "        \"key\":\"id\",\n" +
+                        "        \"direction\": \"ASC\"\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"page\": 0,\n" +
+                        "    \"size\": 200\n" +
+                        "}")
+                .post("/user-service/zone/v1/get_zones_criteria")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .extract()
+                .body()
+                .asString();
+
+        JsonPath arreglo2 = new JsonPath(GetAllZones2);
+        List<Objects> ZonesArray2 = arreglo2.getList("data");
+        int CantZones2 = ZonesArray2.size();
+
+        Assertions.assertEquals(CantZones1 + 1, CantZones2);
+
+        System.out.println("La cantidad de zonas actual es: "+CantZones2+" zonas\n");
+
+
+    }
+
+    @Order(4)
+    @Test
+    public void validationZoneByName(){
+        /***
+         * 5. Esta es la prueba de consultar todas las zonas creadas pero se valida
+         * que el nombre de la zona se encuentre en los registros existentes.
+         */
+
+        GetAllZones3 = RestAssured.given()
+                .log()
+                .all()
+                .contentType(ContentType.TEXT)
+                .contentType(ContentType.JSON)
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token)
+                .header("tenant","INTEREDES")
+                .body("{\n" +
+                        "    \"filters\": [\n" +
+                        "        \n" +
+                        "     \n" +
+                        "    ],\n" +
+                        "    \"sorts\": [\n" +
+                        "        {\n" +
+                        "        \"key\":\"id\",\n" +
+                        "        \"direction\": \"ASC\"\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"page\": 0,\n" +
+                        "    \"size\": 200\n" +
+                        "}")
+                .post("/user-service/zone/v1/get_zones_criteria")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .extract()
+                .body()
+                .asString();
+
+        JsonPath arreglo3 = new JsonPath(GetAllZones3);
+        String ZonesArray3 = arreglo3.getJsonObject("data["+CantZones1+"].description");
+        System.out.println("El nombre de la zona creada fue: " + ZonesArray3 + "\n");
+
+        Assertions.assertEquals("ZONE NORTH WEST10", ZonesArray3);
+
+    }
+
+    @Order(5)
+    @Test
+    public void getAllZoneDataById(){
+        /***
+         * 6. Esta es la prueba de consultar la zona creada por su ID, donde se utiliza el token y
+         * se muestra toda la información referente a la zona.
+         */
+
+        GetZoneById = given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token )
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .get("/user-service/zone/v1/get_zone/"+ CreatedIdZone)
+                .then()
+                //.statusCode(200)
+                .extract()
+                .path("")
+                .toString();
+
+
+        System.out.println("Esta es la información completa del registro de la zona de ID "+ CreatedIdZone +":  \n \n"+GetZoneById+"\n \n");
+
+
+    }
+
+    @Order(6)
+    @Test
+    public void updateZone(){
+        /***
+         * 7. Esta es la prueba de actualizar la zona, donde se actualiza el nombre o descripción de la zona,
+         */
+        UpdateZone = given()
+                .header(appQa,applicationQa)
+                .contentType(ContentType.JSON)
+                .header("Authorization", this.token )
+                .log()
+                .all()
+                .body("{\n" +
+                        "    \"id\":"+CreatedIdZone+",\n" +
+                        "    \"description\": \"ZONE NORTH WEST11\",\n" +
+                        "    \"status\": 1\n" +
+                        "}")
+                .put("/user-service/zone/v1/update_zone")
+                .then()
+                .extract()
+                .toString();
+
+        //System.out.println("Esta es la información de la zona despues de ser actualizada: \n \n" + UpdateZone+"\n \n");
+
+
+    }
+
+    @Order(7)
+    @Test
+    public void validateZoneUpdate(){
+        /***
+         * 8. Esta es la validación de la actualización del registro de la zona
+         */
+        GetZoneById = RestAssured.given()
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token )
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .get("/user-service/zone/v1/get_zone/"+ CreatedIdZone)
+                .then()
+                .statusCode(200)
+                .extract()
+                .path("")
+                .toString();
+
+        System.out.println("Esta es la información de la zona despues de ser z: \n \n"+GetZoneById+"\n \n");
+
+
+    }
+
+    @Order(8)
+    @Test
+    public void delteZone(){
+        /***
+         * 9. Esta es la eliminación de la zona creada
+         */
+
+        responseDeleteZoneById = given()
+                .header(appQa,applicationQa)
+                .contentType(ContentType.JSON)
+                .header("Authorization", this.token )
+                .log()
+                .all()
+                .delete("/user-service/zone/v1/delete_zone/"+CreatedIdZone)
+                .then()
+                .statusCode(204)
+                .toString();
+
+        System.out.println("Se elimino satisfactoriamente la zona. "+responseDeleteZoneById);
+
+
+
+    }
+
+    @Order(9)
+    @Test
+    public  void validateDeltedZone(){
+            /**
+             * 10. Se valida que la zona se haya eliminado
              */
 
-            CreatedIdZone = given()
-                    .log()
-                    .all()
+            validationDeleteZone = RestAssured.given()
                     .header(appQa,applicationQa)
-                    .contentType(ContentType.JSON)
-                    .header("Authorization", token )
-                    .header("tenant","INTEREDES")
-                    .body("{\n" +
-                            "    \"description\": \"ZONE NORTH WEST10\",\n" +
-                            "    \"status\": 1\n" +
-                            "}")
-                    .post("/dynamic-service/services/user-service/zone/v1/create_zone")
-                    .then()
-                    .log()
-                    .all()
-                    .statusCode(200)
-                    .extract()
-                    .path("data.id")
-                    .toString();
-
-            System.out.println("Este es el ID de la zona creada:  \n \n"+CreatedIdZone+"\n \n");
-
-
-        }
-
-        @Order(3)
-        @Test
-        public void validationCreateZone(){
-            /***
-             * 4. Esta es la prueba de consultar todas las zonas creadas despues
-             * de haber creada la nueva zona,en la cual se validara el aumento en 1
-             */
-
-            GetAllZones2 = RestAssured.given()
-                    .log()
-                    .all()
-                    .contentType(ContentType.TEXT)
-                    .contentType(ContentType.JSON)
-                    .header(appQa,applicationQa)
-                    .header("Authorization", token)
-                    .header("tenant","INTEREDES")
-                    .body("{\n" +
-                            "    \"filters\": [\n" +
-                            "        \n" +
-                            "     \n" +
-                            "    ],\n" +
-                            "    \"sorts\": [\n" +
-                            "        {\n" +
-                            "        \"key\":\"id\",\n" +
-                            "        \"direction\": \"ASC\"\n" +
-                            "        }\n" +
-                            "    ],\n" +
-                            "    \"page\": 0,\n" +
-                            "    \"size\": 200\n" +
-                            "}")
-                    .post("/user-service/zone/v1/get_zones_criteria")
-                    .then()
-                    .log()
-                    .all()
-                    .statusCode(200)
-                    .extract()
-                    .body()
-                    .asString();
-
-            JsonPath arreglo2 = new JsonPath(GetAllZones2);
-            List<Objects> ZonesArray2 = arreglo2.getList("data");
-            int CantZones2 = ZonesArray2.size();
-
-            Assertions.assertEquals(CantZones1 + 1, CantZones2);
-
-            System.out.println("La cantidad de zonas actual es: "+CantZones2+" zonas\n");
-
-
-        }
-
-        @Order(4)
-        @Test
-        public void validationZoneByName(){
-            /***
-             * 5. Esta es la prueba de consultar todas las zonas creadas pero se valida
-             * que el nombre de la zona se encuentre en los registros existentes.
-             */
-
-            GetAllZones3 = RestAssured.given()
-                    .log()
-                    .all()
-                    .contentType(ContentType.TEXT)
-                    .contentType(ContentType.JSON)
-                    .header(appQa,applicationQa)
-                    .header("Authorization", token)
-                    .header("tenant","INTEREDES")
-                    .body("{\n" +
-                            "    \"filters\": [\n" +
-                            "        \n" +
-                            "     \n" +
-                            "    ],\n" +
-                            "    \"sorts\": [\n" +
-                            "        {\n" +
-                            "        \"key\":\"id\",\n" +
-                            "        \"direction\": \"ASC\"\n" +
-                            "        }\n" +
-                            "    ],\n" +
-                            "    \"page\": 0,\n" +
-                            "    \"size\": 200\n" +
-                            "}")
-                    .post("/user-service/zone/v1/get_zones_criteria")
-                    .then()
-                    .log()
-                    .all()
-                    .statusCode(200)
-                    .extract()
-                    .body()
-                    .asString();
-
-            JsonPath arreglo3 = new JsonPath(GetAllZones3);
-            String ZonesArray3 = arreglo3.getJsonObject("data["+CantZones1+"].description");
-            System.out.println("El nombre de la zona creada fue: " + ZonesArray3 + "\n");
-
-            Assertions.assertEquals("ZONE NORTH WEST10", ZonesArray3);
-
-        }
-
-        @Order(5)
-        @Test
-        public void getAllZoneDataById(){
-            /***
-             * 6. Esta es la prueba de consultar la zona creada por su ID, donde se utiliza el token y
-             * se muestra toda la información referente a la zona.
-             */
-
-            GetZoneById = given()
-                    .log()
-                    .all()
-                    .header(appQa,applicationQa)
-                    .header("Authorization", token )
+                    .header("Authorization", this.token )
                     .header("tenant","INTEREDES")
                     .contentType(ContentType.JSON)
                     .get("/user-service/zone/v1/get_zone/"+ CreatedIdZone)
                     .then()
-                    //.statusCode(200)
+                    .statusCode(500)
                     .extract()
                     .path("")
                     .toString();
 
-
-            System.out.println("Esta es la información completa del registro de la zona de ID "+ CreatedIdZone +":  \n \n"+GetZoneById+"\n \n");
-
-
+            System.out.println("Se eliminó correctamente la zona.");
         }
-
-        @Order(6)
-        @Test
-        public void updateZone(){
-            /***
-             * 7. Esta es la prueba de actualizar la zona, donde se actualiza el nombre o descripción de la zona,
-             */
-            UpdateZone = given()
-                    .header(appQa,applicationQa)
-                    .contentType(ContentType.JSON)
-                    .header("Authorization", token )
-                    .log()
-                    .all()
-                    .body("{\n" +
-                            "    \"id\":"+CreatedIdZone+",\n" +
-                            "    \"description\": \"ZONE NORTH WEST11\",\n" +
-                            "    \"status\": 1\n" +
-                            "}")
-                    .put("/user-service/zone/v1/update_zone")
-                    .then()
-                    .extract()
-                    .toString();
-
-            //System.out.println("Esta es la información de la zona despues de ser actualizada: \n \n" + UpdateZone+"\n \n");
-
-
-        }
-
-        @Order(7)
-        @Test
-        public void validateZoneUpdate(){
-            /***
-             * 8. Esta es la validación de la actualización del registro de la zona
-             */
-            GetZoneById = RestAssured.given()
-                    .header(appQa,applicationQa)
-                    .header("Authorization", token )
-                    .header("tenant","INTEREDES")
-                    .contentType(ContentType.JSON)
-                    .get("/user-service/zone/v1/get_zone/"+ CreatedIdZone)
-                    .then()
-                    .statusCode(200)
-                    .extract()
-                    .path("")
-                    .toString();
-
-            System.out.println("Esta es la información de la zona despues de ser z: \n \n"+GetZoneById+"\n \n");
-
-
-        }
-
-        @Order(8)
-        @Test
-        public void delteZone(){
-            /***
-             * 9. Esta es la eliminación de la zona creada
-             */
-
-            responseDeleteZoneById = given()
-                    .header(appQa,applicationQa)
-                    .contentType(ContentType.JSON)
-                    .header("Authorization", token )
-                    .log()
-                    .all()
-                    .delete("/user-service/zone/v1/delete_zone/"+CreatedIdZone)
-                    .then()
-                    .statusCode(204)
-                    .toString();
-
-            System.out.println("Se elimino satisfactoriamente la zona. "+responseDeleteZoneById);
-
-
-
-        }
-
-        @Order(9)
-        @Test
-        public  void validateDeltedZone(){
-                /**
-                 * 10. Se valida que la zona se haya eliminado
-                 */
-
-                validationDeleteZone = RestAssured.given()
-                        .header(appQa,applicationQa)
-                        .header("Authorization", token )
-                        .header("tenant","INTEREDES")
-                        .contentType(ContentType.JSON)
-                        .get("/user-service/zone/v1/get_zone/"+ CreatedIdZone)
-                        .then()
-                        .statusCode(500)
-                        .extract()
-                        .path("")
-                        .toString();
-
-                System.out.println("Se eliminó correctamente la zona.");
-            }
 
 
 }

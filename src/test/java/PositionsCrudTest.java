@@ -31,7 +31,7 @@ public class PositionsCrudTest {
     public void getAllPositionsTest(){
         given()
                 .header(appQa, applicationQa)
-                .header("Authorization", token)
+                .header("Authorization", this.token)
                 .header("tenant",tenant)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -67,7 +67,7 @@ public class PositionsCrudTest {
                  .log()
                  .all()
                 .header(appQa,applicationQa)
-                .header("Authorization", token)
+                .header("Authorization", this.token)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
                         "    \"title\": \"SCRUM MASTER \",\n" +
@@ -92,7 +92,7 @@ public class PositionsCrudTest {
 
                  given()
                 .header(appQa,applicationQa)
-                .header("Authorization",token)
+                .header("Authorization",this.token)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
                         "     \"id\":"+ IdPosition + " ,\n" +
@@ -113,7 +113,7 @@ public class PositionsCrudTest {
     public void positionAssignedToACompany(){
         given()
                 .header(appQa, applicationQa)
-                .header("Authorization", token)
+                .header("Authorization", this.token)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
                         "    \"companyId\": 2,\n" +
@@ -135,7 +135,7 @@ public class PositionsCrudTest {
     public void deletePositionAssignedToACompany(){
         given()
                 .header(appQa, applicationQa)
-                .header("Authorization", token)
+                .header("Authorization", this.token)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
                         "    \"companyId\": 2,\n" +
@@ -159,7 +159,7 @@ public class PositionsCrudTest {
         IdPosition =
                 given()
                 .header(appQa, applicationQa)
-                .header("Authorization", token)
+                .header("Authorization", this.token)
                 .header("tenant",tenant)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -195,7 +195,7 @@ public class PositionsCrudTest {
         IdDelete =
                 given()
                 .header(appQa, applicationQa)
-                .header("Authorization", token)
+                .header("Authorization", this.token)
                 .header("tenant",tenant)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
@@ -227,7 +227,7 @@ public class PositionsCrudTest {
         given()
                 .header(appQa,applicationQa)
                 .contentType(ContentType.JSON)
-                .header("Authorization", token )
+                .header("Authorization", this.token )
                 .log()
                 .all()
                 .delete("/user-service/job/v1/delete_job/"+IdDelete)
