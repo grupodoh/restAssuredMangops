@@ -176,7 +176,7 @@ public class HeadquartersCrudTest {
 
     @Order(5)
     @Test
-    public void updateHeadquarter(){
+    void updateHeadquarter(){
         given()
                 .log()
                 .all()
