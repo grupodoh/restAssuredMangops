@@ -87,13 +87,45 @@ public class Contracts {
     @Test
     public void updateContract(){
 
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"id\": "+ IdContract +",\n" +
+                        "    \"numContract\": \"CQA3425\",\n" +
+                        "    \"description\": \"Contrato de Prueba para QA/QC 2023\",\n" +
+                        "    \"startDate\": \"2023-09-01T00:00:00Z\",\n" +
+                        "    \"finalDate\": \"2023-10-01T00:00:00Z\"\n" +
+                        "}")
+                .put("/dynamic-service/services/parameters-service/contract/v1/update")
+                .then()
+                .log()
+                .all()
+                .statusCode(200);
+
+
     }
 
     @Order(4)
     @Test
     public void deleteContract(){
 
-    }
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", this.token)
+                .header("tenant","INTEREDES")
+                .delete("/dynamic-service/services/parameters-service/contract/v1/delete/"+ IdContract )
+                .then()
+                .log()
+                .all();
 
+
+    }
 
 }
