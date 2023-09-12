@@ -58,8 +58,6 @@ public class Contracts {
         given()
                 .log()
                 .all()
-                .log()
-                .all()
                 .header(appQa,applicationQa)
                 .header("Authorization", this.token)
                 .header("tenant","INTEREDES")
@@ -69,17 +67,19 @@ public class Contracts {
                         "        \"description\": \"Contrato de Prueba para QA\",\n" +
                         "        \"startDate\": \"2023-09-01T00:00:00Z\",\n" +
                         "        \"finalDate\": \"2023-10-01T00:00:00Z\",\n" +
-                        "        \"omaContractTypeId\": 3,\n" +
-                        "        \"companyId\": 2,\n" +
+                        "        \"omaContractTypeId\": 5,\n" +
+                        "        \"companyId\": 2\n" +
                         "    }")
                 .post("/dynamic-service/services/parameters-service/contract/v1/create")
                 .then()
                 .log()
                 .all()
-                .statusCode(200)
+                .statusCode(201)
                 .extract()
                 .path("data.id")
                 .toString();
+
+        //System.out.println(IdContract);
 
     }
 
@@ -124,8 +124,6 @@ public class Contracts {
                 .then()
                 .log()
                 .all();
-
-
     }
 
 }

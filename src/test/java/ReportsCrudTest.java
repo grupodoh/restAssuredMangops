@@ -69,8 +69,6 @@ public class ReportsCrudTest {
                 .extract()
                 .body()
                 .asString();
-
-
     }
 
 
