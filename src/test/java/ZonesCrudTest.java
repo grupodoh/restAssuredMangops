@@ -62,9 +62,7 @@ public class ZonesCrudTest {
          * de  crear la nueva zona
          */
 
-        GetAllZones1 = RestAssured.given()
-                .log()
-                .all()
+        GetAllZones1 = given()
                 .contentType(ContentType.JSON)
                 .header(appQa,applicationQa)
                 .header("Authorization", this.token)
@@ -319,8 +317,6 @@ public class ZonesCrudTest {
                 .header(appQa,applicationQa)
                 .contentType(ContentType.JSON)
                 .header("Authorization", this.token )
-                .log()
-                .all()
                 .delete("/user-service/zone/v1/delete_zone/"+CreatedIdZone)
                 .then()
                 .statusCode(204)

@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Contracts {
+public class ContractsCrudTest {
 
     private String token;
     private String appQa = "application";
