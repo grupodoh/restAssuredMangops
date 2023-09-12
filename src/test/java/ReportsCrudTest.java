@@ -29,8 +29,6 @@ public class ReportsCrudTest {
                 .contentType(ContentType.JSON)
                 .body("{\n" +
                         "    \"filters\": [],\n" +
-                        "    \"page\": 0,\n" +
-                        "    \"size\": 10,\n" +
                         "    \"sorts\": [" +
                         "{\n" +
                         "            \"key\":\"id\",\n" +
