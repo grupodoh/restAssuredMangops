@@ -1,23 +1,22 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 import java.util.Random;
 
 import static io.restassured.RestAssured.given;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BackUpCrudTest {
 
     private String token;
     private String appQa = "application";
     private String applicationQa= "siie.qa.interedes.com.co";
     private String iDBackUps;
-    private String nr;
-    private Integer numRandom;
+    public static Integer  numRandom;
 
 
 
@@ -62,30 +61,42 @@ public class BackUpCrudTest {
 
         Random rand = new Random();
         int index = rand.nextInt(arreglo1.size()-1);
-        numRandom =arreglo1.get(index);
+        BackUpCrudTest.numRandom = arreglo1.get(index);
 
-         nr = numRandom.toString();
         System.out.println(numRandom);
-        System.out.println(nr);
-
-
-
     }
+
 
     @Order(2)
     @Test
     public void downloadBackupFile(){
+
         given()
                 .log()
                 .all()
                 .header("Authorization",token)
                 .header(appQa, applicationQa)
                 .header("TENANT", "INTEREDES")
-                .get("/dynamic-service/services/operacion-campo-service/backup/download-backup/"+nr)
+                .get("/dynamic-service/services/operacion-campo-service/backup/download-backup/"+BackUpCrudTest.numRandom)
                 .then()
                 .log()
                 .all();
 
+    }
 
+    @Order(3)
+    @Test
+    public void deleteBackUp(){
+        given()
+                .log()
+                .all()
+                .header("Authorization",token)
+                .header(appQa, applicationQa)
+                .header("TENANT", "INTEREDES")
+                .delete("/dynamic-service/services/operacion-campo-service/backup/delete-backup/"+BackUpCrudTest.numRandom)
+                .then()
+                .log()
+                .all()
+                .statusCode(200);
     }
 }
