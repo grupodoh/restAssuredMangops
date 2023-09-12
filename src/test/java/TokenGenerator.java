@@ -1,12 +1,15 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import lombok.Value;
+import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 
 public class TokenGenerator {
 
-    private String applicationQa = "siie.qa.interedes.com.co";
     private String token;
+    private String applicationQa = "siie.qa.interedes.com.co";
+   // private String token;
     public String getToken() {
 
         RestAssured.baseURI = "https://siie.qa.interedes.com.co/services";
@@ -30,7 +33,7 @@ public class TokenGenerator {
                 .path("data.accessToken")
                 .toString();
 
-       // System.out.println("Este es el token que se generó:  \n" + token + "\n \n");
+        System.out.println("Este es el token que se generó:  \n" + token + "\n \n");
 
         return token;
     }
