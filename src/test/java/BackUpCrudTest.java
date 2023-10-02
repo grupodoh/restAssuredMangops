@@ -60,10 +60,15 @@ public class BackUpCrudTest {
         System.out.println(arreglo1);
 
         Random rand = new Random();
-        int index = rand.nextInt(arreglo1.size()-1);
-        BackUpCrudTest.numRandom = arreglo1.get(index);
+        int size = arreglo1.size();
+        if (size > 0) {
+            int bound = size - 1;
 
-        System.out.println(numRandom);
+            int index = bound > 0 ? rand.nextInt(bound) : 0;
+            BackUpCrudTest.numRandom = arreglo1.get(index);
+
+            System.out.println(numRandom);
+        }
     }
 
 
