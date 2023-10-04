@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8ad1b5c-1e4b-4814-a16a-9bcf7ef46422" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/files/copia_seguridad_prueba_QA.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TeamsCrudTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BackUpCrudTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BackUpCrudTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TeamsCrudTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TeamsCrudTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +124,7 @@
       <recent name="C:\proyectos\practica\RestAssuredParctice\restAssuredTestGradle\src\test\files" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.BackUpCrudTest">
+  <component name="RunManager" selected="Gradle.TeamsCrudTest.listRoles">
     <configuration name="BackUpCrudTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -219,7 +217,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="TeamsCrudTest.GetAllTeams" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TeamsCrudTest.listRoles" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -232,7 +230,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TeamsCrudTest.GetAllTeams&quot;" />
+            <option value="&quot;TeamsCrudTest.listRoles&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -244,11 +242,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TeamsCrudTest.listRoles" />
         <item itemvalue="Gradle.BackUpCrudTest" />
         <item itemvalue="Gradle.BackUpCrudTest.GetLastBackUp" />
         <item itemvalue="Gradle.BackUpCrudTest.UploadBackUp" />
         <item itemvalue="Gradle.BackUpCrudTest.getAllBackUps" />
-        <item itemvalue="Gradle.TeamsCrudTest.GetAllTeams" />
       </list>
     </recent_temporary>
   </component>
