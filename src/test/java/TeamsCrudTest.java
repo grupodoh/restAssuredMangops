@@ -13,7 +13,8 @@ public class TeamsCrudTest {
     private String token;
     private String appQa = "application";
     private String applicationQa= "siie.qa.interedes.com.co";
-    private String Roles;
+    private ArrayList<Integer> Roles;
+    private  Integer rol;
     @BeforeEach
     public void setUp(){
         var tkn = new TokenGenerator();
@@ -49,7 +50,6 @@ public class TeamsCrudTest {
     @Order(2)
     @Test
     public void listRoles(){
-
         Roles = given()
                 .log()
                 .all()
@@ -70,18 +70,14 @@ public class TeamsCrudTest {
                 .then()
                 .extract()
                 .body()
-                .path("data.id")
-                .toString();
+                .path("data.id");
 
         System.out.println(Roles);
 
-
-
-
-        /*Random rand = new Random();
-        int indiceRandon = rand.nextInt(Roles.length());
-        int idRandon = Roles[indiceRandon]*/
-
+        Random random = new Random();
+        int indiceAleatoreo = random.nextInt(Roles.toArray().length);
+        rol =Roles.get(indiceAleatoreo);
+        System.out.println(rol);
 
     }
 
@@ -95,6 +91,46 @@ public class TeamsCrudTest {
     @Order(4)
     @Test
     public void searchEmployee(){
+
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization",token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"filters\": [\n" +
+                        "        {\n" +
+                        "            \"key\": \"name\",\n" +
+                        "            \"operator\": \"LIKE\",\n" +
+                        "            \"field_type\": \"STRING\",\n" +
+                        "            \"value\": \"\"\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"key\": \"status\",\n" +
+                        "            \"operator\": \"EQUAL\",\n" +
+                        "            \"field_type\": \"INTEGER\",\n" +
+                        "            \"value\": 1\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"sorts\": [\n" +
+                        "        {\n" +
+                        "            \"key\":\"id\",\n" +
+                        "            \"direction\":\"ASC\"\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"page\": null,\n" +
+                        "    \"size\": null\n" +
+                        "}")
+                .post("/dynamic-service/services/user-service/employee/v1/search")
+                .then()
+                .log()
+                .all()
+                .extract()
+                .body()
+                .path("data.id");
+
 
     }
 
