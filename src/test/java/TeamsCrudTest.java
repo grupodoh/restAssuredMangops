@@ -81,14 +81,8 @@ public class TeamsCrudTest {
 
     }
 
+
     @Order(3)
-    @Test
-    public void listUsers(){
-
-    }
-
-
-    @Order(4)
     @Test
     public void searchEmployee(){
 
@@ -135,7 +129,7 @@ public class TeamsCrudTest {
     }
 
 
-    @Order(5)
+    @Order(4)
     @Test
     public void getRolByTeamsId(){
 
@@ -159,9 +153,24 @@ public class TeamsCrudTest {
                 .log()
                 .all();
 
+    }
 
 
+    @Order(5)
+    @Test
+    public void CreateTeam(){
 
+    }
+
+    @Order(6)
+    @Test
+    public void UpdateTeam(){
+
+    }
+
+    @Order(7)
+    @Test
+    public void DeleteTeam(){
 
     }
 
