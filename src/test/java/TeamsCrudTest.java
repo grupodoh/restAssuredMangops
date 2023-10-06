@@ -123,7 +123,7 @@ public class TeamsCrudTest {
                 .all()
                 .extract()
                 .body()
-                .path("data.id");
+                .path("data.code");
 
 
     }
@@ -160,17 +160,59 @@ public class TeamsCrudTest {
     @Test
     public void CreateTeam(){
 
+
+
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization",token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "  \"name\": \"QA Automatizadores Estandar\",\n" +
+                        "  \"status\": true,\n" +
+                        "  \"userList\":[\""+userCode1+"\",\""+userCode2+"\"],\n" +
+                        "  \"roleList\": [\""+roleId1+"\",\""+roleId2+"\"]\n" +
+                        "}")
+                .post("/dynamic-service/services/security-service/teams/v1/create_team")
+                .then()
+                .log()
+                .all();
     }
 
     @Order(6)
     @Test
     public void UpdateTeam(){
 
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization",token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .put("")
+                .then()
+                .log()
+                .all();
+
     }
 
     @Order(7)
     @Test
     public void DeleteTeam(){
+
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization",token)
+                .header("tenant","INTEREDES")
+                .delete("/dynamic-service/services/security-service/teams/v1/delete_team/ " + teamId)
+                .then()
+                .log()
+                .all();
 
     }
 
