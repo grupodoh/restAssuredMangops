@@ -18,7 +18,9 @@ public class TeamsCrudTest {
     private  List<String> codeEmployeeList = new ArrayList<>();
     private ArrayList<String> EmployeeCode;
 
-    private  String teamIdCreated;
+    private Integer idTeamCreated;
+
+    private  Integer ipdatedId;
 
 
 
@@ -33,29 +35,28 @@ public class TeamsCrudTest {
         token = tkn.getToken();
     }
 
-
     @Order(1)
     @Test
     public void GetAllTeams(){
-            given()
-                    .log()
-                    .all()
-                    .header(appQa,applicationQa)
-                    .header("Authorization",token)
-                    .header("tenant","INTEREDES")
-                    .contentType(ContentType.JSON)
-                    .body("{\n" +
-                            "    \"filters\": [],\n" +
-                            "    \"sorts\": [],\n" +
-                            "    \"page\": null,\n" +
-                            "    \"size\": null\n" +
-                            "}")
-                    .post("/dynamic-service/services/security-service/teams/v1/list_teams_criteria")
-                    .then()
-                    .log()
-                    .all()
-                    .extract()
-                    .body();
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization",token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"filters\": [],\n" +
+                        "    \"sorts\": [],\n" +
+                        "    \"page\": null,\n" +
+                        "    \"size\": null\n" +
+                        "}")
+                .post("/dynamic-service/services/security-service/teams/v1/list_teams_criteria")
+                .then()
+                .log()
+                .all()
+                .extract()
+                .body();
 
     }
 
@@ -80,6 +81,9 @@ public class TeamsCrudTest {
                         "}")
                 .post("/dynamic-service/services/user-service/rol/v1/get_roles_criteria")
                 .then()
+                .log()
+                .all()
+                .statusCode(200)
                 .extract()
                 .body()
                 .path("data.id");
@@ -104,54 +108,55 @@ public class TeamsCrudTest {
     public void searchEmployee(){
 
         EmployeeCode = given()
-                            .log()
-                            .all()
-                            .header(appQa,applicationQa)
-                            .header("Authorization",token)
-                            .header("tenant","INTEREDES")
-                            .contentType(ContentType.JSON)
-                            .body("{\n" +
-                                    "    \"filters\": [\n" +
-                                    "        {\n" +
-                                    "            \"key\": \"name\",\n" +
-                                    "            \"operator\": \"LIKE\",\n" +
-                                    "            \"field_type\": \"STRING\",\n" +
-                                    "            \"value\": \"\"\n" +
-                                    "        },\n" +
-                                    "        {\n" +
-                                    "            \"key\": \"status\",\n" +
-                                    "            \"operator\": \"EQUAL\",\n" +
-                                    "            \"field_type\": \"INTEGER\",\n" +
-                                    "            \"value\": 1\n" +
-                                    "        }\n" +
-                                    "    ],\n" +
-                                    "    \"sorts\": [\n" +
-                                    "        {\n" +
-                                    "            \"key\":\"id\",\n" +
-                                    "            \"direction\":\"ASC\"\n" +
-                                    "        }\n" +
-                                    "    ],\n" +
-                                    "    \"page\": null,\n" +
-                                    "    \"size\": null\n" +
-                                    "}")
-                            .post("/dynamic-service/services/user-service/employee/v1/search")
-                            .then()
-                            .log()
-                            .all()
-                            .extract()
-                            .body()
-                            .path("data.content.code");
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization",token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"filters\": [\n" +
+                        "        {\n" +
+                        "            \"key\": \"name\",\n" +
+                        "            \"operator\": \"LIKE\",\n" +
+                        "            \"field_type\": \"STRING\",\n" +
+                        "            \"value\": \"\"\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"key\": \"status\",\n" +
+                        "            \"operator\": \"EQUAL\",\n" +
+                        "            \"field_type\": \"INTEGER\",\n" +
+                        "            \"value\": 1\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"sorts\": [\n" +
+                        "        {\n" +
+                        "            \"key\":\"id\",\n" +
+                        "            \"direction\":\"ASC\"\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "    \"page\": null,\n" +
+                        "    \"size\": null\n" +
+                        "}")
+                .post("/dynamic-service/services/user-service/employee/v1/search")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .extract()
+                .body()
+                .path("data.content.code");
 
-                            System.out.println(EmployeeCode);
+        System.out.println(EmployeeCode);
 
-                            for (int i = 0; i < 3; i++) {
-                                Random randomEmp = new Random();
-                                int indeiceAleatoreo = randomEmp.nextInt(EmployeeCode.toArray().length);
-                                codeEmployeeList.add(EmployeeCode.get(indeiceAleatoreo).toString());
+        for (int i = 0; i < 3; i++) {
+            Random randomEmp = new Random();
+            int indeiceAleatoreo = randomEmp.nextInt(EmployeeCode.toArray().length);
+            codeEmployeeList.add('"'+EmployeeCode.get(indeiceAleatoreo).toString()+'"');
 
-                                System.out.println(codeEmployeeList);
+            System.out.println(codeEmployeeList);
 
-                            }
+        }
 
     }
 
@@ -187,8 +192,7 @@ public class TeamsCrudTest {
     @Test
     public void CreateTeam(){
 
-
-        given()
+        idTeamCreated=        given()
                 .log()
                 .all()
                 .header(appQa,applicationQa)
@@ -205,18 +209,23 @@ public class TeamsCrudTest {
                 .then()
                 .log()
                 .all()
+                .statusCode(200)
                 .extract()
                 .body()
                 .path("data.id");
 
-        System.out.println();
+        System.out.println(idTeamCreated);
     }
 
     @Order(6)
     @Test
     public void UpdateTeam(){
+        ArrayList<String> vacio1=new ArrayList<>();
+        ArrayList<String> vacio2=new ArrayList<>();
 
-        given()
+        System.out.println(idTeamCreated);
+
+        ipdatedId = given()
                 .log()
                 .all()
                 .header(appQa,applicationQa)
@@ -224,19 +233,24 @@ public class TeamsCrudTest {
                 .header("tenant","INTEREDES")
                 .contentType(ContentType.JSON)
                 .body("{\n" +
-                        "    \"id\": "+teamIdCreated+",\n" +
-                        "    \"name\": \"QA Automatizadores Estandar\",\n" +
+                        "    \"id\": "+idTeamCreated.toString()+",\n" +
+                        "    \"name\": \"QA Automatizadores Senior\",\n" +
                         "    \"status\": true,\n" +
-                        "    \"userList\": [ ],\n" +
-                        "    \"roleList\": [ ]")
+                        "    \"userList\":"+vacio1+",\n" +
+                        "    \"roleList\": "+vacio2+"\n"+
+                        "   }")
                 .put("/dynamic-service/services/security-service/teams/v1/update_team")
                 .then()
                 .log()
-                .all();
+                .all()
+                .statusCode(200)
+                .extract()
+                .body()
+                .path("data.id");
 
     }
 
-    /*@Order(7)
+    @Order(7)
     @Test
     public void DeleteTeam(){
 
@@ -246,14 +260,13 @@ public class TeamsCrudTest {
                 .header(appQa,applicationQa)
                 .header("Authorization",token)
                 .header("tenant","INTEREDES")
-                .delete("/dynamic-service/services/security-service/teams/v1/delete_team/ " )
+                .delete("/dynamic-service/services/security-service/teams/v1/delete_team/"+ipdatedId  )
                 .then()
                 .log()
-                .all();
+                .all()
+                .statusCode(204);
 
-    }*/
-
-
+    }
 
 
 }
