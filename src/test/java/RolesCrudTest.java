@@ -1,6 +1,13 @@
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
+import jdk.jfr.Description;
 import org.junit.jupiter.api.*;
+import io.qameta.allure.Allure;
+import org.junit.jupiter.api.DisplayName;
+import static io.qameta.allure.util.ResultsUtils.*;
 
+import static io.qameta.allure.SeverityLevel.*;
+import static io.qameta.allure.util.ResultsUtils.PARENT_SUITE_LABEL_NAME;
 import static io.restassured.RestAssured.given;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -48,7 +55,8 @@ public class RolesCrudTest {
 
     @Order(2)
     @Test
-    public void createRol(){
+    void createRol(){
+
         idRolCreated = given()
                 .log()
                 .all()
@@ -77,11 +85,52 @@ public class RolesCrudTest {
     @Test
     public void rolById(){
 
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", token)
+                .header("tenant","INTEREDES")
+                .get("/dynamic-service/services/user-service/rol/v1/get_rol/"+idRolCreated)
+                .then()
+                .log()
+                .all()
+                .extract()
+                .body();
+
+
     }
 
     @Order(4)
     @Test
     public void updateRol(){
+
+
+
+        var idUpdated = given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", token)
+                .header("tenant","INTEREDES")
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"id\": "+idRolCreated+",\n" +
+                        "    \"name\": \"Rol De Prueba Automatizadcion QA Changed\",\n" +
+                        "    \"code\": \"RPAQA\",\n" +
+                        "    \"status\": true,\n" +
+                        "    \"components\": []\n" +
+                        "}")
+                .put("/dynamic-service/services/user-service/rol/v1/update_rol")
+                .then()
+                .log()
+                .all()
+                .extract()
+                .body()
+                .path("data.id");
+
+        Assertions.assertEquals(idRolCreated,idUpdated);
+
 
     }
 
@@ -89,14 +138,36 @@ public class RolesCrudTest {
     @Order(5)
     @Test
     public void deleteComponentePorRol(){
-
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", token)
+                .header("tenant","INTEREDES")
+                .delete("/dynamic-service/services/security-service/role/v1/delete_component_by_role/"+idRolCreated)
+                .then()
+                .log()
+                .all()
+                .extract()
+                .body();
     }
 
 
     @Order(6)
     @Test
-    public void delteRolPorId(){
-
+    public void deleteRolPorId(){
+        given()
+                .log()
+                .all()
+                .header(appQa,applicationQa)
+                .header("Authorization", token)
+                .header("tenant","INTEREDES")
+                .delete("/dynamic-service/services/user-service/rol/v1/delete_rol/"+idRolCreated)
+                .then()
+                .log()
+                .all()
+                .extract()
+                .body();
     }
 
 }

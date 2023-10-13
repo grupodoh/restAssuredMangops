@@ -41,18 +41,18 @@ public class ContractorCompaniesCrudTest {
                 .body("{\n" +
                         "    \"filters\": [\n" +
                         "        {\n" +
-                        "            \"key\": \"name\",\n" +
-                        "            \"operator\": \"LIKE\",\n" +
-                        "            \"field_type\": \"STRING\",\n" +
-                        "            \"value\": \"\"\n" +
+                        "            \"key\": \"status\",\n" +
+                        "            \"operator\": \"EQUAL\",\n" +
+                        "            \"field_type\": \"INTEGER\",\n" +
+                        "            \"value\": 1\n" +
                         "        }\n" +
                         "    ],\n" +
-                        "    \"sorts\": [" +
-                        "                   {\n" +
-                                "               \"key\":\"id\",\n" +
-                                "               \"direction\": \"ASC\"\n" +
-                                "           }\n" +
-                        "               ],\n" +
+                        "    \"sorts\": [\n" +
+                        "        {\n" +
+                        "            \"key\":\"id\",\n" +
+                        "            \"direction\": \"ASC\"\n" +
+                        "        }\n" +
+                        "    ],\n" +
                         "    \"page\": null,\n" +
                         "    \"size\": null\n" +
                         "}")

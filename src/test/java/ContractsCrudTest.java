@@ -126,4 +126,10 @@ public class ContractsCrudTest {
                 .all();
     }
 
+    @Order(2)
+    @Test
+    public void gatAllDocumentsType(){
+
+    }
+
 }

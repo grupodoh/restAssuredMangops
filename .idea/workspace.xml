@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8ad1b5c-1e4b-4814-a16a-9bcf7ef46422" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/files/REDISprod.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/files/reportRedis.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/files/reportRedisQa.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/RolesCrudTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/allure.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/UseresCrudTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TeamsCrudTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TeamsCrudTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ContractorCompaniesCrudTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ContractorCompaniesCrudTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ContractsCrudTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ContractsCrudTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/RolesCrudTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/RolesCrudTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,17 +32,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="restAssuredTestGradle" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="restAssuredTestGradle" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -119,25 +111,67 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/proyectos/practica/RestAssuredParctice/restAssuredTestGradle/src/test/files&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/proyectos/practica/RestAssuredParctice/restassuredmangops/src/test/java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\proyectos\practica\RestAssuredParctice\restassuredmangops\src\test\java" />
       <recent name="C:\proyectos\practica\RestAssuredParctice\restAssuredTestGradle\src\test\files" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LeerArchivoPlano">
-    <configuration name="LeerArchivoPlano" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="LeerArchivoPlano" />
-      <module name="restAssuredTestGradle.test" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RunManager" selected="Gradle.ContractorCompaniesCrudTest.getAllCompanies">
+    <configuration name="ContractorCompaniesCrudTest.getAllCompanies" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ContractorCompaniesCrudTest.getAllCompanies&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="RolesCrudTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;RolesCrudTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
     </configuration>
     <configuration name="RolesCrudTest.createRol" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -163,7 +197,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RolesCrudTest.getAllRoles" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'restAssuredTestGradle.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -175,8 +209,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;RolesCrudTest.getAllRoles&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -187,7 +219,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TeamsCrudTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UseresCrudTest.getAllUsers" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -200,31 +232,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TeamsCrudTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="TeamsCrudTest.searchEmployee" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;TeamsCrudTest.searchEmployee&quot;" />
+            <option value="&quot;UseresCrudTest.getAllUsers&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -237,11 +245,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ContractorCompaniesCrudTest.getAllCompanies" />
+        <item itemvalue="Gradle.UseresCrudTest.getAllUsers" />
+        <item itemvalue="Gradle.RolesCrudTest" />
         <item itemvalue="Gradle.RolesCrudTest.createRol" />
-        <item itemvalue="Application.LeerArchivoPlano" />
-        <item itemvalue="Gradle.RolesCrudTest.getAllRoles" />
-        <item itemvalue="Gradle.TeamsCrudTest" />
-        <item itemvalue="Gradle.TeamsCrudTest.searchEmployee" />
+        <item itemvalue="Gradle.Tests in 'restAssuredTestGradle.test'" />
       </list>
     </recent_temporary>
   </component>
@@ -300,8 +308,27 @@
           <line>141</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/RolesCrudTest.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/RolesCrudTest.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/RolesCrudTest.java</url>
+          <line>131</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/restAssuredTestGradle$mangops_in_restAssuredTestGradle_test.ic" NAME="mangops in restAssuredTestGradle.test Coverage Results" MODIFIED="1694445368918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
